@@ -81,30 +81,18 @@ class EventContainerWrapper extends React.Component {
 
     let { start, end } = eventTimes(event, accessors)
     if (direction === 'UP') {
-      const endOfStartDay = dates.endOf(start, 'day')
-      if (dates.gte(end, endOfStartDay)) {
-        start = dates.min(
-          newTime,
-          slotMetrics.closestSlotFromDate(endOfStartDay, -1)
-        )
-      } else {
-        start = dates.min(newTime, slotMetrics.closestSlotFromDate(end, -1))
-      }
+      start = dates.min(
+        newTime,
+        slotMetrics.closestSlotFromDate(end, -1) || newTime
+      )
     } else if (direction === 'DOWN') {
-      const startOfEndDay = dates.endOf(end, 'day')
-      if (dates.gte(start, startOfEndDay)) {
-        end = dates.max(newTime, slotMetrics.closestSlotFromDate(startOfEndDay))
-      } else {
-        end = dates.max(newTime, slotMetrics.closestSlotFromDate(start))
-      }
+      end = dates.max(
+        newTime,
+        slotMetrics.closestSlotFromDate(start) || newTime
+      )
     }
 
-    // Override values from getRange method with the actual date range
-    this.update(event, {
-      ...slotMetrics.getRange(start, end),
-      startDate: start,
-      endDate: end,
-    })
+    this.update(event, slotMetrics.getRange(start, end))
   }
 
   handleDropFromOutside = (point, boundaryBox) => {
