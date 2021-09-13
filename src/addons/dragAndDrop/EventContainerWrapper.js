@@ -92,7 +92,12 @@ class EventContainerWrapper extends React.Component {
       )
     }
 
-    this.update(event, slotMetrics.getRange(start, end))
+    // Override values from getRange method with the actual date range
+    this.update(event, {
+      ...slotMetrics.getRange(start, end),
+      startDate: start,
+      endDate: end,
+    })
   }
 
   handleDropFromOutside = (point, boundaryBox) => {
