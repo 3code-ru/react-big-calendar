@@ -1,14 +1,14 @@
 {
-  "name": "react-big-calendar",
-  "version": "0.23.0",
+  "name": "@3code/react-big-calendar",
+  "version": "0.35.2",
   "description": "Calendar! with events",
   "author": {
-    "name": "Jason Quense",
-    "email": "monastic.panic@gmail.com"
+    "name": "3code",
+    "email": "sanek-ekb@mail.ru"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jquense/react-big-calendar.git"
+    "url": "git+https://github.com/3code-ru/react-big-calendar.git"
   },
   "license": "MIT",
   "main": "lib/index.js",
