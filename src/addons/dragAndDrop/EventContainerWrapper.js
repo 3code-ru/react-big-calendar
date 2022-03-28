@@ -97,7 +97,7 @@ class EventContainerWrapper extends React.Component {
       // but don't overwrite the start date as it could be outside this day boundary.
       const newEnd = localizer.max(
         newTime,
-        slotMetrics.closestSlotFromDate(start)
+        slotMetrics.closestSlotFromDate(start, 1)
       )
       newRange = slotMetrics.getRange(start, newEnd)
       newRange = {
