@@ -198,7 +198,6 @@ export default class TimeGrid extends Component {
 
         if (
           accessors.allDay(event) ||
-          localizer.startAndEndAreDateOnly(eStart, eEnd) ||
           (!showMultiDayTimes && !localizer.isSameDate(eStart, eEnd))
         ) {
           allDayEvents.push(event)
