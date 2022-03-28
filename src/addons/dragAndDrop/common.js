@@ -1,10 +1,9 @@
 import { wrapAccessor } from '../../utils/accessors'
 import { createFactory } from 'react'
-import * as dates from '../../utils/dates'
 
 export const dragAccessors = {
-  start: wrapAccessor(e => e.start),
-  end: wrapAccessor(e => e.end),
+  start: wrapAccessor((e) => e.start),
+  end: wrapAccessor((e) => e.end),
 }
 
 function nest(...Components) {
@@ -19,7 +18,7 @@ export function mergeComponents(components = {}, addons) {
   const keys = Object.keys(addons)
   const result = { ...components }
 
-  keys.forEach(key => {
+  keys.forEach((key) => {
     result[key] = components[key]
       ? nest(components[key], addons[key])
       : addons[key]
@@ -33,10 +32,10 @@ export function pointInColumn(bounds, point) {
   return x < right + 10 && x > left && y > top
 }
 
-export function eventTimes(event, accessors) {
+export function eventTimes(event, accessors, localizer) {
   let start = accessors.start(event)
   let end = accessors.end(event)
 
-  const duration = dates.diff(end, start, 'milliseconds')
+  const duration = localizer.diff(start, end, 'milliseconds')
   return { start, end, duration }
 }
