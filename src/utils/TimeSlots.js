@@ -100,7 +100,11 @@ export function getSlotMetrics({
     },
 
     startsBeforeDayOrInDay(date) {
-      return localizer.lt(date, localizer.add(start, 1, 'seconds'), 'seconds')
+      return localizer.lt(
+        date,
+        localizer.add(localizer.startOf(start, 'day'), 1, 'seconds'),
+        'seconds'
+      )
     },
 
     startsAfterDay(date) {
@@ -108,7 +112,11 @@ export function getSlotMetrics({
     },
 
     startsAfterDayOrInDay(date) {
-      return localizer.gt(date, localizer.add(end, 1, 'seconds'), 'seconds')
+      return localizer.gt(
+        date,
+        localizer.add(localizer.endOf(end, 'day'), 1, 'seconds'),
+        'seconds'
+      )
     },
 
     startsBefore(date) {
