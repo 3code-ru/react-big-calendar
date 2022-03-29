@@ -119,14 +119,28 @@ export default class TimeGrid extends Component {
 
     return resources.map(([id, resource], i) =>
       range.map((date, jj) => {
-        let daysEvents = (groupedEvents.get(id) || []).filter((event) =>
-          localizer.inRange(
+        let daysEvents = (groupedEvents.get(id) || []).filter((event) => {
+          const end = accessors.end(event)
+
+          if (
+            localizer.diff(
+              localizer.endOf(date, 'day'),
+              localizer.endOf(end, 'day'),
+              'milliseconds'
+            ) === 0 &&
+            localizer.diff(end, localizer.endOf(end, 'day'), 'milliseconds') ===
+              86399999
+          ) {
+            return false
+          }
+
+          return localizer.inRange(
             date,
             accessors.start(event),
             accessors.end(event),
             'day'
           )
-        )
+        })
 
         let daysBackgroundEvents = (
           groupedBackgroundEvents.get(id) || []

@@ -214,16 +214,18 @@ class DayColumn extends React.Component {
       let label
 
       const startsBeforeDay = slotMetrics.startsBeforeDay(start)
+      const startsBeforeDayOrInDay = slotMetrics.startsBeforeDayOrInDay(start)
       const startsAfterDay = slotMetrics.startsAfterDay(end)
+      const startsAfterDayIrOnDay = slotMetrics.startsAfterDayOrInDay(end)
 
       if (startsBeforeDay) format = 'eventTimeRangeEndFormat'
-      else if (startsAfterDay) format = 'eventTimeRangeStartFormat'
+      else if (startsAfterDayIrOnDay) format = 'eventTimeRangeStartFormat'
 
-      if (startsBeforeDay && startsAfterDay) label = messages.allDay
+      if (startsBeforeDayOrInDay && startsAfterDay) label = messages.allDay
       else label = localizer.format({ start, end }, format)
 
       let continuesPrior = startsBeforeDay || slotMetrics.startsBefore(start)
-      let continuesAfter = startsAfterDay || slotMetrics.startsAfter(end)
+      let continuesAfter = startsAfterDayIrOnDay || slotMetrics.startsAfter(end)
 
       return (
         <TimeGridEvent
