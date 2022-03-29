@@ -53,13 +53,14 @@ export default function DragAndDrop({ localizer }) {
       <div className="height600">
         <DragAndDropCalendar
           defaultDate={defaultDate}
-          defaultView={Views.MONTH}
+          defaultView={Views.WEEK}
           events={myEvents}
           localizer={localizer}
           onEventDrop={moveEvent}
           onEventResize={resizeEvent}
           popup
           resizable
+          showMultiDayTimes
         />
       </div>
     </Fragment>
